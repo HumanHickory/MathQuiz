@@ -1,0 +1,59 @@
+<div class="mt-5 row" *ngIf="!ShowResults">
+    <div class="col-4 offset-4">
+        <div class="text-center mb-3">
+            <h1>Getting Started</h1>
+        </div>
+        <ol class="h5">
+            <li>Select the operator you want to practice.</li>
+            <li>Choose the numbers you'd like to practice.</li>
+            <li>Answer as many questions as you can in 60 seconds!</li>
+        </ol>
+        <div class="mt-3">
+            <button [routerLink]="['/mult']" type="button" class="btn primary-btn">Practice Multiplication</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="text-center mt-5" *ngIf="ShowResults">
+
+    <div class="display-4 mb-5">Awesome Job!</div>
+    <div class="h3">You answered {{TotalCount}} problems in 60 seconds</div>
+    <div class="h5">{{SelectedNumberString}}</div>
+    <div class="row mt-4">
+        <div class="col-4 offset-4 row h1">
+            <div class="success-bg border col-6 py-4">
+                Correct
+            </div>
+
+            <div class="danger-bg border col-6 py-4">
+                Incorrect
+            </div>
+        </div>
+        <div class="col-4 offset-4 row h1">
+            <div class="border col-6 py-4">
+                {{CorrectCount}}
+            </div>
+
+            <div class="border col-6 py-4">
+                {{IncorrectCount}}
+            </div>
+        </div>
+
+        <div class="h2">Let's focus on...</div>
+        <div>
+            <h5 *ngFor="let answer of IncorrectAnswers">{{answer.expression}}</h5>
+        </div>
+        <div class="col-2 offset-5 mt-5">
+            <button type="button" class="btn primary-btn" (click)="ShowDetails = !ShowDetails">Show Answer
+                History</button>
+        </div>
+        <div *ngIf="ShowDetails">
+            <div [innerHTML]="FormerAnswers"></div>
+        </div>
+    </div>
+
+
+
+</div>

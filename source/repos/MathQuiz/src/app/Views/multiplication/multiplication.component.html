@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-lg-3 offset-lg-4 text-center" *ngIf="!PreferencesSet">
+        <div class="mt-5 row">
+            <div class="mb-3">
+                <b>What multiples do you want to practice?</b>
+            </div>
+            <div *ngFor="let number of Numbers" class="field-checkbox col-3">
+                <p-checkbox name="number" value="number" [value]="number" [(ngModel)]="SelectedNumbers" class="my-1">
+                </p-checkbox>
+                <label [for]="number"> {{number}}</label>
+            </div>
+        </div>
+
+        <button type="button" class="btn primary-btn mt-3" (click)="Initiate()">Start!</button>
+    </div>
+
+
+    <div class="col-lg-12 text-center" *ngIf="PreferencesSet">
+        <div class="d-flex justify-content-end pe-5">
+            <h2> {{TimerCount}}</h2>
+        </div>
+        <div class="display-5 mt-4">Victoria's Math Quiz</div>
+        <h3>Multiplication</h3>
+        <hr>
+        <div style="margin-top: 8vh;">
+            <h1 [ngClass]="Correct">{{MathProblem}}
+                <input type="number" [(ngModel)]="UserAnswer" style="width: 5vw;"
+                    (keypress)="eventHandler($event.keyCode)" />
+            </h1>
+            <button type="button" class="btn primary-btn mt-3" (click)="CheckAnswer()">Check Answer</button>
+        </div>
+    </div>
+
+    <!-- <div class="col-lg-2 secondary-bg" style="height: 100vh" *ngIf="PreferencesSet">
+        <div [innerHTML]="FormerAnswers"></div>
+    </div> -->
+
+</div>
