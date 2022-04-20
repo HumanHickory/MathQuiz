@@ -1,59 +1,52 @@
-<div class="mt-5 row" *ngIf="!ShowResults">
-    <div class="col-4 offset-4">
-        <div class="text-center mb-3">
-            <h1>Getting Started</h1>
+<div class="row" *ngIf="!PreferencesSet">
+    <div class="col-lg-6 offset-lg-3 text-center">
+        <div class="mt-5 row">
+            <div class="mb-3">
+                <b>What multiples do you want to practice?</b>
+            </div>
+            <div *ngFor="let number of Numbers" class="field-checkbox col-3">
+                <p-checkbox name="number" value="number" [value]="number" [(ngModel)]="SelectedNumbers" class="my-1">
+                </p-checkbox>
+                <label [for]="number"> {{number}}</label>
+            </div>
+
+            <div class="my-3">
+                <b>What difficulty do you want to practice?</b>
+            </div>
+            <div *ngFor="let diff of DifficultyOptions" class="field-checkbox col-3 radioButton">
+                <p-radioButton [inputId]="diff" name="DifficultyOptions" [value]="diff"
+                    [(ngModel)]="SelectedDifficulty"></p-radioButton>
+                <label [for]="diff">{{diff}}</label>
+            </div>
         </div>
-        <ol class="h5">
-            <li>Select the operator you want to practice.</li>
-            <li>Choose the numbers you'd like to practice.</li>
-            <li>Answer as many questions as you can in 60 seconds!</li>
-        </ol>
-        <div class="mt-3">
-            <button [routerLink]="['/mult']" type="button" class="btn primary-btn">Practice Multiplication</button>
-        </div>
+
+        <button type="button" class="btn secondary-btn mt-3" (click)="Initiate()">Start!</button>
     </div>
 </div>
+<div class="row">
 
 
-
-<div class="text-center mt-5" *ngIf="ShowResults">
-
-    <div class="display-4 mb-5">Awesome Job!</div>
-    <div class="h3">You answered {{TotalCount}} problems in 60 seconds</div>
-    <div class="h5">{{SelectedNumberString}}</div>
-    <div class="row mt-4">
-        <div class="col-4 offset-4 row h1">
-            <div class="success-bg border col-6 py-4">
-                Correct
+    <div class="col-lg-12 text-center" *ngIf="PreferencesSet">
+        <div class="d-flex justify-content-end pe-5">
+            <h2> {{TimerCount}}</h2>
+        </div>
+        <div class="display-5 mt-4">Victoria's Math Quiz</div>
+        <h3>{{TypeOfMath}}</h3>
+        <hr>
+        <div style="margin-top: 8vh;">
+            <h1 [ngClass]="Correct">{{MathProblem}}
+            </h1>
+            <div class="mt-5">
+                <h1>
+                    <span *ngIf="SelectedDifficulty == 'PreAlgebra'">{{SelectedAlgebraicLetters}} = </span>
+                    <input type="number" [(ngModel)]="UserAnswer" style="width: 75px;" class="lineOnly"
+                        (keypress)="eventHandler($event.keyCode)" />
+                </h1>
             </div>
 
-            <div class="danger-bg border col-6 py-4">
-                Incorrect
-            </div>
-        </div>
-        <div class="col-4 offset-4 row h1">
-            <div class="border col-6 py-4">
-                {{CorrectCount}}
-            </div>
-
-            <div class="border col-6 py-4">
-                {{IncorrectCount}}
-            </div>
-        </div>
-
-        <div class="h2">Let's focus on...</div>
-        <div>
-            <h5 *ngFor="let answer of IncorrectAnswers">{{answer.expression}}</h5>
-        </div>
-        <div class="col-2 offset-5 mt-5">
-            <button type="button" class="btn primary-btn" (click)="ShowDetails = !ShowDetails">Show Answer
-                History</button>
-        </div>
-        <div *ngIf="ShowDetails">
-            <div [innerHTML]="FormerAnswers"></div>
+            <button type="button" class="btn tertiary-btn mt-3" (click)="CheckAnswer()">Check Answer</button>
         </div>
     </div>
-
 
 
 </div>

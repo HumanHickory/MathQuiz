@@ -1,14 +1,18 @@
 :root {
     --primary: #21dde4;
-    --secondary: rgb(236, 236, 236);
+    --secondary: rgb(1, 0, 20);
     --tertiary: #ffc525;      
 
     --primaryDark: #19c3c8;
-    --tertiaryDark: #e28c01;
+    --secondaryAlt: rgb(3, 0, 70);
+    --tertiaryAlt: #ce961d;
 
     --failed: #a5111d;
+    --bodyText: rgb(77, 77, 77);
+}
 
-
+body {
+    color: var(--bodyText);
 }
 
 .textSuccess {
@@ -17,13 +21,13 @@
 
 .textDanger {
     animation: shake 0.30s cubic-bezier(.36,.07,.19,.97);
-    color: black;
+    color: var(--failed);
 }
 
 
 .textDangerReanimate {
     animation: shake2 0.30s cubic-bezier(.36,.07,.19,.97);
-    color: black;
+    color: var(--failed);
 }
 
 .pointer {
@@ -42,22 +46,29 @@ p-checkbox {
     color:var(--secondary);
 }
 
+.tertiary-text{
+    color:var(--tertiary);
+}
+
 label {
     font-weight: bold;
     color: black;
 }
 
-.tertiary-text{
-    color:var(--tertiary);
+.shadow-text{
+    text-shadow: 1px 2px 3px black;
 }
 
 .primary-bg {
     background-color: var(--primary);
 }
 
+
 .secondary-bg{
 background-color: var(--secondary);
+color: white;
 }
+
 
 .success-bg {
     background-color: var(--primary);
@@ -91,17 +102,62 @@ background-color: var(--secondary);
     color: var(--primaryDark);
 }
 
+.secondary-btn{
+    background-color:var(--secondary);
+    border-color:var(--secondary);
+    font-weight: 600;
+    color: white;
+}
+
+.secondary-btn:hover {
+    background-color:var(--secondaryAlt);
+    border-color:var(--secondaryAlt);
+    color: white;
+
+}
+
+.secondary-btn:active {
+    background-color:white;
+    border-color:var(--secondaryAlt);
+    color: var(--secondaryAlt);
+}
+
+.tertiary-btn{
+    background-color:var(--tertiary);
+    border-color:var(--tertiary);
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.tertiary-btn:hover {
+    background-color:var(--tertiaryAlt);
+    border-color:var(--tertiaryAlt);
+    color: var(--secondary);
+
+}
+
+.tertiary-btn:active {
+    background-color:white;
+    border-color:var(--tertiaryAlt);
+    color: var(--tertiaryAlt);
+}
+
 /* links */
 a {
     color:var(--tertiary);
 }
 
 a:hover {
-    color:var(--tertiaryDark);
+    color:var(--tertiaryAlt);
+}
+
+li {
+    padding-top: 8px;
+    text-align: left;
 }
 
 /*INPUTS*/
-input {
+input.lineOnly {
     border: none;
     border-bottom: 2px solid black;
     padding-left: 15px;
@@ -111,6 +167,24 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+input.Numerator,
+input.Denominator,
+input.MixedNumber {
+    width: 4vw;
+    border-radius: 5px;
+    text-align: center;
+}
+
+input.Numerator {
+    border-color: var(--primary);
+}
+input.Denominator {
+    border-color: var(--tertiaryAlt);
+}
+input.MixedNumber {
+    border-color: var(--secondaryAlt);
 }
 
 
@@ -139,10 +213,31 @@ a.navbar-brand:hover,
     text-decoration: underline;
 }
 
-.p-checkbox .p-checkbox-box.p-highlight {
-    border-color: var(--primary);
-    background: var(--primary);
+
+.imgContainer > img{ 
+    width: 100%;
 }
+
+.tertiary-border-bottom {
+    border-bottom: 2px solid var(--tertiary);
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+    border-color: var(--primary) !important;
+    background: var(--primary) !important;
+}
+
+
+.p-radiobutton .p-radiobutton-box.p-highlight {
+    border-color: var(--primary) !important;
+    background: var(--primary) !important;
+}
+
+.radioButton  > label {
+    padding-left: 7px;
+}
+
+
 
 @keyframes shake {
     10%, 90% {
@@ -189,3 +284,40 @@ a.navbar-brand:hover,
     }
     
   }
+
+  
+   
+   .flashingText {
+     text-align: center;
+     font-size: 5.5em;
+     color: var(--primary);
+     letter-spacing: -7px;
+     font-weight: 700;
+     text-transform: uppercase;
+     animation: blur .75s ease-out;
+     animation-iteration-count: 3; 
+     text-shadow: 0px 0px 5px #6af5fa, 0px 0px 7px #6af5fa;
+   }
+   
+   @keyframes blur {
+     from {
+       text-shadow:0px 0px 10px #dfc293,
+         0px 0px 10px #dfc293, 
+         0px 0px 25px #dfc293,
+         0px 0px 25px #dfc293,
+         0px 0px 25px #dfc293,
+         0px 0px 25px #dfc293,
+         0px 0px 25px #dfc293,
+         0px 0px 25px #dfc293,
+         0px 0px 50px #dfc293,
+         0px 0px 50px #dfc293,
+         0px 0px 50px #6af5fa,
+         0px 0px 150px #6af5fa,
+         0px 10px 100px #6af5fa,
+         0px 10px 100px #6af5fa,
+         0px 10px 100px #6af5fa,
+         0px 10px 100px #6af5fa,
+         0px -10px 100px #6af5fa,
+         0px -10px 100px #6af5fa;
+     }
+   }

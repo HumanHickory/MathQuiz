@@ -1,0 +1,125 @@
+
+<div class="row">
+    <div class="col-lg-3 secondary-bg d-none d-lg-block" style="height: 95vh">
+        <div class="my-4 text-center">
+            <h2 class="tertiary-text">High Scores</h2>
+        </div>
+        <div class="row ms-1 primary-text">
+            <span class="col-1">#</span>
+            <span class="col-2">Score</span>
+            <span class="col-3">Type</span>
+            <span class="col-3">Level</span>
+            <span class="col-2">Correct</span>
+            <hr class="tertiary-text">
+        </div>
+        <div *ngFor="let score of HighScores; let i = index" class="row ms-1">
+            <span class="col-1"><b>{{i + 1}}</b></span>
+            <span class="col-2">{{score.score}}</span>
+            <span class="col-3">{{score.type}}</span>
+            <span class="col-3">{{score.difficulty}}</span>
+            <span class="col-2">{{score.totalNumber}}</span>
+            <hr class="tertiary-text">
+        </div>
+    </div>
+
+    <div class="col-lg-4 offset-lg-1 col-12 text-center mt-5" *ngIf="!ShowResults">
+        <div class="text-center mb-3">
+            <h1>Getting Started</h1>
+        </div>
+        <ol class="h5">
+            <li class="my-2 text-center">Select the operator you want to practice.</li>
+            <li class="my-2 text-center">Choose the numbers you'd like to practice.</li>
+            <li class="my-2 text-center">Answer as many questions as you can in 60 seconds!</li>
+        </ol>
+        <div class="mt-5 m-auto">
+            <button [routerLink]="['/quiz', 'Multiplication']" type="button" class="btn primary-btn m-2">Practice Multiplication</button>
+            <button [routerLink]="['/quiz', 'Division']" type="button" class="btn tertiary-btn m-2">Practice Division</button>
+            <button [routerLink]="['/fractionQuiz']" type="button" class="btn secondary-btn m-2">Practice Fractions</button>
+        </div>
+ 
+    </div>
+
+
+
+
+
+
+
+    <div class="col-lg-8 mt-5 text-center" *ngIf="ShowResults">
+        <div [innerHTML]="ResultsMessage"></div>
+
+        <div class="h3">You answered {{TotalCount}} problems in 60 seconds</div>
+        <div class="h5">{{SelectedNumberString}}</div>
+
+        <div class="mt-4" *ngIf="TypeOfMath != 'Fractions'">
+            <button [routerLink]="['/quiz', TypeOfMath]" type="button" class="btn secondary-btn">Play Again</button>
+        </div>
+        <div class="mt-4" *ngIf="TypeOfMath == 'Fractions'">
+            <button [routerLink]="['/fractionQuiz']" type="button" class="btn secondary-btn">Play Again</button>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-6 col-12 offset-lg-3 row h1">
+                <div class="success-bg border col-6 py-4">
+                    Correct
+                </div>
+
+                <div class="danger-bg border col-6 py-4">
+                    Incorrect
+                </div>
+            </div>
+            <div class="col-lg-6 col-12 offset-lg-3 row h1">
+                <div class="border col-6 py-4">
+                    {{CorrectCount}}
+                </div>
+
+                <div class="border col-6 py-4">
+                    {{IncorrectCount}}
+                </div>
+            </div>
+
+            <div class="h2" *ngIf="IncorrectAnswers?.length">Focus on...</div>
+            <div>
+                <h5 *ngFor="let answer of IncorrectAnswers">{{answer.expression}}</h5>
+            </div>
+
+            <div class="text-center my-2">
+                <button type="button" class="btn tertiary-btn" (click)="ShowDetails = !ShowDetails">Show Answer
+                    History</button>
+            </div>
+            <div *ngIf="ShowDetails" class="mt-5 mb-3 row text-center">
+                <div class="col-lg-6 offset-lg-3 row">
+                    <div class="col-lg-3 col-6" *ngFor="let former of FormerAnswers">
+                        <div [innerHTML]="former"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--MOBILE ONLY-->
+    <div class="col-12 secondary-bg d-lg-none">
+        <div class="my-4 text-center">
+            <h2 class="tertiary-text">High Scores</h2>
+        </div>
+        <div class="row ms-1 primary-text">
+            <span class="col-1">#</span>
+            <span class="col-2">Score</span>
+            <span class="col-3">Type</span>
+            <span class="col-3">Level</span>
+            <span class="col-2">Correct</span>
+            <hr class="tertiary-text">
+        </div>
+        <div *ngFor="let score of HighScores; let i = index" class="row ms-1">
+            <span class="col-1"><b>{{i + 1}}</b></span>
+            <span class="col-2">{{score.score}}</span>
+            <span class="col-3">{{score.type}}</span>
+            <span class="col-3">{{score.difficulty}}</span>
+            <span class="col-2">{{score.totalNumber}}</span>
+            <hr class="tertiary-text">
+        </div>
+    </div>
+
+
+</div>

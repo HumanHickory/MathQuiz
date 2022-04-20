@@ -8,19 +8,22 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ToastModule} from 'primeng/toast';
+import {RadioButtonModule} from 'primeng/radiobutton';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SettingsComponent } from './Views/settings/settings.component';
 import { QuizComponent } from './Views/quiz/quiz.component';
-import { MultiplicationComponent } from './Views/multiplication/multiplication.component';
+import { ResultsComponent } from './Views/results/results.component';
+import { FractionQuizComponent } from './Views/fraction-quiz/fraction-quiz.component';
+import { HowToComponent } from './Views/how-to/how-to.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SettingsComponent,
     QuizComponent,
-    MultiplicationComponent
+    ResultsComponent,
+    FractionQuizComponent,
+    HowToComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { MultiplicationComponent } from './Views/multiplication/multiplication.c
     DialogModule,
     InputTextareaModule,
     ToastModule,
+    RadioButtonModule,
     BrowserAnimationsModule
   ],
   providers: [AppComponent],

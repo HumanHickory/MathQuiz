@@ -1,0 +1,125 @@
+<div class="row" *ngIf="!PreferencesSet">
+    <div class="col-lg-6 offset-lg-3 text-center">
+        <div class="mt-5 row">
+            <div class="my-3">
+                <b>How do you want to play?</b>
+            </div>
+            <div *ngFor="let playType of PlayTypeOptions" class="field-checkbox mt-2 col-3 radioButton">
+                <p-radioButton [inputId]="playType" name="PlayTypeOptions" [value]="playType"
+                    [(ngModel)]="PlayTypeSelected"></p-radioButton>
+                <label [for]="playType">{{playType}}</label>
+            </div>
+
+            <div class="col-12 mt-5 mb-3"> <b>What difficulty do you want?</b></div>
+
+            <div *ngFor="let diff of DifficultyOptions" class="field-checkbox mt-2 col-3 radioButton">
+                <p-radioButton [inputId]="diff" name="DifficultySelected" [value]="diff"
+                    [(ngModel)]="DifficultySelected"></p-radioButton>
+                <label [for]="diff">{{diff}}</label>
+            </div>
+
+            <div class="col-12 mt-5 mb-2"> <b>Is this just for practice? <small>(Hints are available, but no score is
+                        recorded)</small></b></div>
+
+            <div class="field-checkbox">
+                <p-checkbox [(ngModel)]="IsPractice" [binary]="true"></p-checkbox>
+                <label>Practice Only</label>
+            </div>
+        </div>
+
+        <button type="button" class="btn secondary-btn mt-5" (click)="Initiate()">Start!</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 text-center row" *ngIf="PreferencesSet">
+        <div class="d-flex justify-content-end pe-5" *ngIf="!IsPractice">
+            <h2> {{TimerCount}}</h2>
+        </div>
+        <div class="display-5 mt-4">Victoria's Math Quiz</div>
+        <h3>{{TypeOfMath}}</h3>
+        <hr>
+        <div style="margin-top: 8vh;" class="col-lg-3 offset-lg-4">
+            <div class="h1 row">
+
+                <!--add some space if we're not going to show mixed numbers-->
+                <div class="col-2" *ngIf="MixedNumbers"></div>
+                <div class="col-3" *ngIf="!MixedNumbers"></div>
+
+                <!--Right Side of the Equation-->
+                <div class="col-3 row">
+                    <div class="col-12">{{Numerator}}</div>
+                    <div class="col-12 my-2">
+                        <hr width="100%" class="m-auto mt-4 pt-1" style="color: black">
+                    </div>
+                    <div class="col-12">{{Denominator}}</div>
+                </div>
+
+                <!--Equal Sign-->
+                <div class="col-3 row text-center">
+                    <div class="col-12"></div>
+                    <div class="col-12">=</div>
+                </div>
+
+                <!--Whole Number-->
+                <div class="col-3 row" *ngIf="MixedNumbers">
+                    <input type="number" [(ngModel)]="UserAnswerMixedNumber" class="MixedNumber" [ngClass]="Correct"
+                        id="UserAnswerMixedNumber" (keypress)="eventHandler($event.keyCode)" />
+                </div>
+
+                <!--Answer Section-->
+                <div class="col-3 row">
+                    <div class="col-12">
+                        <input type="number" [(ngModel)]="UserAnswer" class="Numerator" id="userAnswer" [ngClass]="Correct"
+                            (keypress)="eventHandler($event.keyCode)" />
+                    </div>
+                    <div class="col-12 my-2">
+                        <hr width="100%" class="m-auto mt-2 pt-1" style="color: black">
+                    </div>
+
+                    <div class="col-12" *ngIf="PlayTypeSelected == PlayTypeOptions[0]">{{VariableDenominator}}</div>
+                    <div *ngIf="PlayTypeSelected == PlayTypeOptions[1]">
+                        <input type="number" [(ngModel)]="UserAnswer2" class="Denominator" [ngClass]="Correct"
+                            (keypress)="eventHandler($event.keyCode)" />
+                    </div>
+
+                </div>
+
+                <!--Practice Steps-->
+                <div class="col-12 row mt-5" *ngIf="IsPractice" style="font-size: 1rem">
+                    <ul class="py-1">
+                        <li><b>Step 1:</b> {{Step1}} </li>
+                        <li><b>Step 2:</b> {{Step2}} </li>
+                        <li><b>Step 3:</b> {{Step3}} </li>
+                    </ul>
+                    <p class="primary-text ps-2" (click)="ShowAnswer = !ShowAnswer"><b>I need <span
+                                *ngIf="ShowAnswer">less</span> <span *ngIf="!ShowAnswer">more</span> help</b></p>
+
+                    <ul class="py-1" *ngIf="ShowAnswer">
+                        <li><b>Step 4:</b> {{Step4}} </li>
+                        <li><b>Step 5:</b> {{Step5}} </li>
+                        <li><b>Step 6:</b> {{Step6}} </li>
+                    </ul>
+                </div>
+
+                <div class="col-12 row mt-5">
+                    <button type="button" class="btn tertiary-btn mt-3 col-4 offset-5" width="50"
+                        (click)="CheckAnswer()">Check Answer</button>
+                </div>
+
+                <div class="col-12 row mt-5" *ngIf="IsPractice">
+                    <button type="button" class="btn secondary-btn mt-3 col-4 offset-5" (click)="EndSession()">End
+                        Practice</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<style>
+    .test {
+        border: 2px solid red;
+    }
+</style>
